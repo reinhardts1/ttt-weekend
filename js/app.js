@@ -34,7 +34,7 @@ resetBtnEl.addEventListener('click', init)
 init()
 function init() {
   board = [null, null, null, null, null, null, null, null, null]
-  turn = -1
+  turn = 1
   winner = null
   render()
   resetBtnEl.setAttribute("hidden", true)
@@ -54,12 +54,15 @@ function render() {
       resetBtnEl.removeAttribute("hidden")
     })
     
-    if(winner === null) {
-      messageEls.textContent = `It's ${turn === 1 ? "Player 2's turn!" : "Player 1's turn!"}`
+    if (!winner) {
+      messageEls.textContent = `Your turn player ${turn === 1 ? "Doofus" : "Doofuz"}`
+    } else if (winner === "T") {
+      messageEls.textContent = "Oops, a tie!"
     } else {
-      messageEls.textContent = `${winner === "T" ? "It's a tie!" : "Congrats! " + turn + " won!"}`
+      messageEls.textContent = `You won Player ${winner === 1 ? "Doofus" : "Doofuz"}`
+    }
   }
-}
+
   function handleClick(evt) {
       const sqIdx = parseInt(evt.target.id[2])
         if (winner !== null){
